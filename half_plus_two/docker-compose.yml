@@ -1,0 +1,42 @@
+version: "3.7"
+services: 
+    db:
+        image: postgres:14.1
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+    redis:
+        image: "redis:alpine"
+        container_name: redis
+    web:
+        build: .
+        command: > 
+            bash -c "python manage.py makemigrations &&
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+        volumes: 
+            - .:/app
+        ports: 
+            - "8000:8000"
+        environment:
+            - POSTGRES_NAME=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        depends_on: 
+            - db
+            - redis
+    tf:
+        image: tensorflow/serving
+        ports:
+            - "8501:8501"
+        expose:
+            - "8501"
+        volumes:
+            - ./../serving/tensorflow_serving/servables/tensorflow/testdata/saved_model_half_plus_two_cpu:/models/half_plus_two
+        environment:
+            - MODEL_NAME=half_plus_two
+        depends_on:
+            - web

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My list view</title>
+</head>
+<body>
+    <h1>enter value</h1>
+    <form action="/" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit">
+    </form>
+</body>
+
+    <h1>Requests</h1>
+    <table>
+        <tr>
+            <th>Request time</th>
+            <th>Request</th>
+            <th>Response Predictions</th>
+            <th>Response time</th>
+        </tr>
+        {% for request in  request_list%}
+        <tr>
+            <td>{{ request.request_time }}</td>
+            <td>{{ request.request }}</td>
+            <td>{{ request.response.predictions }}</td>
+            <td>{{ request.response_time }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No data yet</td>
+            <td>No data yet</td>
+            <td>No data yet</td>
+            <td>No data yet</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <ul>
+    {% for request in  request_list%}
+        <li>{{ request.request }} - {{ request.response.predictions }}</li>
+    {% empty %}
+        <li>No articles yet.</li>
+    {% endfor %}
+    </ul>
+</html>

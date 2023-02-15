@@ -1,0 +1,21 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Wed 2023-02-15 19:10:17 CET; 7min ago
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 2401 (dockerd)
+      Tasks: 22
+     Memory: 233.5M
+     CGroup: /system.slice/docker.service
+             └─2401 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.692792156+01:00" level=info msg="[core] [Channel #11 SubChannel #12] Subchannel picks a new address \"localhost\" to connect" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.692858560+01:00" level=warning msg="[core] [Channel #11 SubChannel #12] grpc: addrConn.createTransport failed to connect to {\n  \"Addr\": \"localhost\",\n  \"ServerName\": \"localhost\",\n  \"Attributes\": null,\n  \"BalancerAttributes\": null,\n  \"Type\": 0,\n  \"Metadata\": null\n}. Err: connection error: desc = \"transport: Error while dialing only one connection allowed\"" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.692886473+01:00" level=info msg="[core] [Channel #11] Channel Connectivity change to CONNECTING" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.692892775+01:00" level=info msg="[core] [Channel #11 SubChannel #12] Subchannel Connectivity change to TRANSIENT_FAILURE" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.692949060+01:00" level=info msg="[core] [Channel #11] Channel Connectivity change to TRANSIENT_FAILURE" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.693007180+01:00" level=error msg="healthcheck failed fatally"
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.693023821+01:00" level=info msg="[core] [Channel #11] Channel Connectivity change to SHUTDOWN" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.693042296+01:00" level=info msg="[core] [Channel #11 SubChannel #12] Subchannel Connectivity change to SHUTDOWN" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.693060670+01:00" level=info msg="[core] [Channel #11 SubChannel #12] Subchannel deleted" module=grpc
+velj 15 19:16:22 Marin-pc dockerd[2401]: time="2023-02-15T19:16:22.693073344+01:00" level=info msg="[core] [Channel #11] Channel deleted" module=grpc
