@@ -1,0 +1,7 @@
+python3 -m venv venv
+. ./venv/bin/activate
+sudo docker-compose build
+sudo docker-compose up
+
+systemctl status docker.service
+sudo docker compose up db

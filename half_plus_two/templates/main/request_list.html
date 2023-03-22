@@ -1,49 +1,80 @@
+{% load static %}
+{% block content %}
+{%load crispy_forms_tags %} 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My list view</title>
+    <title>Half Plus Two</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <h1>enter value</h1>
-    <form action="/" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit">
-    </form>
+    <div class = "container">
+        <div class = "title">
+            <h1>Half Plus Two TensorFlow Model Demonstration</h1>
+        </div>
+        <div class = "input-container">
+            <div class = "input">
+                <h2>Enter value:</h2>
+                <form action="/" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class = "submit-button">
+                        <input
+                            type="submit"
+                            style = "background-color: rgba(42, 42, 42);
+                                    color: white;
+                                    font-size: 15px;
+                                    border-radius:
+                                    10px; width: 30%;
+                                    height: 30%;
+                                    border: none;
+                                    padding: 15px;
+                                    backdrop-filter: blur(16px) saturate(180%);
+                                    -webkit-backdrop-filter: blur(16px) saturate(180%);
+                                    background-color: rgba(255, 255, 255, 0.2);
+                                    border-radius: 12px;
+                                    border: 1px solid rgba(209, 213, 219, 0.3);"
+                        >
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class = "requests-container">
+            <div class = "requests">
+                <h2>Requests</h2>
+                <hr>
+                <br>
+                <table>
+                    <tr>
+                        <th>Request time</th>
+                        <th>Request</th>
+                        <th>Response Predictions</th>
+                        <th>Response time</th>
+                    </tr>
+                    {% for request in  request_list%}
+                    <tr>
+                        <td>{{ request.request_time }}</td>
+                        <td>{{ request.request }}</td>
+                        <td>{{ request.response.predictions }}</td>
+                        <td>{{ request.response_time }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No data yet</td>
+                        <td>No data yet</td>
+                        <td>No data yet</td>
+                        <td>No data yet</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
-
-    <h1>Requests</h1>
-    <table>
-        <tr>
-            <th>Request time</th>
-            <th>Request</th>
-            <th>Response Predictions</th>
-            <th>Response time</th>
-        </tr>
-        {% for request in  request_list%}
-        <tr>
-            <td>{{ request.request_time }}</td>
-            <td>{{ request.request }}</td>
-            <td>{{ request.response.predictions }}</td>
-            <td>{{ request.response_time }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>No data yet</td>
-            <td>No data yet</td>
-            <td>No data yet</td>
-            <td>No data yet</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <ul>
-    {% for request in  request_list%}
-        <li>{{ request.request }} - {{ request.response.predictions }}</li>
-    {% empty %}
-        <li>No articles yet.</li>
-    {% endfor %}
-    </ul>
 </html>
+
+{% endblock %}

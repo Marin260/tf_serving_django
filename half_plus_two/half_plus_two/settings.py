@@ -16,8 +16,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
-    'main.apps.MainConfig'
+    'crispy_forms',
+    'main.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,10 +57,10 @@ WSGI_APPLICATION = 'half_plus_two.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': 'postgres',
-        #'USER': 'tf_postgres',
-        #'PASSWORD': 'postgres',
-        #'HOST': 'localhost',
+        'NAME': 'postgres',
+        'USER': 'tf_postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
 
         'NAME': os.environ.get('POSTGRES_NAME'),
         'USER': os.environ.get('POSTGRES_USER'),
@@ -109,5 +111,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 60
+CACHE_MIDDLEWARE_SECONDS = 1
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
